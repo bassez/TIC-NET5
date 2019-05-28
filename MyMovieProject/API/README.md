@@ -1,5 +1,14 @@
 # API routes fot our IMDB-ish project
 
+## Linux issues
+
+start command : 
+```
+ASPNETCORE_ENVIRONMENT=Development mono bin/Debug/net461/API.exe
+```
+
+NO HTTPS Redirection !
+
 ## Encoding
 
 Format : JSON
