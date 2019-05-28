@@ -315,3 +315,15 @@ C:\Users\silve\projects\net5\MyMovieProject\API\obj\Debug\net461\API.RazorTarget
 C:\Users\silve\projects\net5\MyMovieProject\API\obj\Debug\net461\API.csproj.CopyComplete
 C:\Users\silve\projects\net5\MyMovieProject\API\obj\Debug\net461\API.exe
 C:\Users\silve\projects\net5\MyMovieProject\API\obj\Debug\net461\API.pdb
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\EntityFramework.SqlServer.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\EntityFramework.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\EntityFramework.SqlServerCompact.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\System.Data.SqlServerCe.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\Microsoft.EntityFrameworkCore.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\Remotion.Linq.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\System.Interactive.Async.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\silve\projects\net5\MyMovieProject\API\bin\Debug\net461\System.Data.SqlClient.dll
