@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using API.Models;
 
 namespace API.Controllers
 {
@@ -19,14 +20,20 @@ namespace API.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            if (id == 1)
+            {
+                return Ok(new Movies() { Id = 1, Name = "Endgame", Category = "Action" });
+            } else
+            {
+                return NotFound();
+            }
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Movies value)
         {
         }
 
