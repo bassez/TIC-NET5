@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+using API.Models;
+
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : Controller
     {
         // GET api/users
         [HttpGet]
@@ -26,8 +28,9 @@ namespace API.Controllers
 
         // POST api/users
         [HttpPost]
-        public void Post([FromBody] string user)
+        public  ActionResult<string> Post([FromBody] Users user)
             {
+                return Json(user);
             }
 
         // PUT api/users/5

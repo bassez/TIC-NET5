@@ -10,7 +10,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MoviesController : ControllerBase
+    public class MoviesController : Controller
     {
         // GET api/movies
         [HttpGet]
@@ -34,8 +34,9 @@ namespace API.Controllers
 
         // POST api/movies
         [HttpPost]
-        public void Post([FromBody] string movie)
+        public ActionResult<string> Post([FromBody] string movie)
             {
+                return Ok("Created");
             }
 
         // PUT api/movies/5
