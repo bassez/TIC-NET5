@@ -8,35 +8,35 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MoviesController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        // GET api/movies
+        // GET api/users
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
             {
-                return new string[] { "movie1", "movie2" };
+                return new string[] { "user1", "user2" };
             }
 
-        // GET api/movies/5
+        // GET api/users/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
             {
-                return "movie";
+                return "user";
             }
 
-        // POST api/movies
+        // POST api/users
         [HttpPost]
-        public void Post([FromBody] string movie)
+        public void Post([FromBody] string user)
             {
             }
 
-        // PUT api/movies/5
+        // PUT api/users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string movie)
+        public void Put(int id, [FromBody] string user)
             {
             }
 
-        // DELETE api/movies/5
+        // DELETE api/users/5
         [HttpDelete("{id}")]
         public void Delete(int id)
             {
