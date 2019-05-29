@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+
 using API.Models;
 
 namespace API
@@ -28,8 +29,13 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApiDbContext>(options => options.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=MyDatabase;Integrated Security=True;Pooling=False"));
+            // services.AddDbContext<ApiDbContext>(options => options.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=MyDatabase;Integrated Security=True;Pooling=False"));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var connection = "Data Source=net5.db";
+            services.AddDbContext<ApiDbContext>
+                (options => options.UseSqlite(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

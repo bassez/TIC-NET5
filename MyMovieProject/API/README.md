@@ -1,6 +1,14 @@
 # API routes fot our IMDB-ish project
 
+## WIP
+
+DB Tuto : https://docs.microsoft.com/fr-fr/ef/core/get-started/aspnetcore/new-db?tabs=netcore-cli
+
 ## Linux issues
+
+```
+System.ComponentModel.Win32Exception (8): Exec format error
+```
 
 start command : 
 ```
