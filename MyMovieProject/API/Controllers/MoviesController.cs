@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+using API.Models;
+
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -21,7 +23,13 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
             {
-                return "movie";
+                if (id == 1)
+                {
+                    return Ok(new Movies() { Id = 1, Name = "Endgame", Category = "Action" });
+                } else
+                {
+                    return NotFound();
+                }
             }
 
         // POST api/movies
