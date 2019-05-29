@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["title"] = ViewContext.RouteData.Values["id"];
+}
+
+
+<div class="movies-page">
+    <h1 class="colored header-title display-4">@ViewData["title"]</h1>
+    <div class="movies-container">
+        @for (int i = 0; i < 4; i++)
+        {
+            <div class="wrapper">
+                <div class="wrapper-content">
+                    @for (int y = 0; y < 4; y++)
+                    {
+                        <div class="movies-affiche">
+                            <img class="affiche-img" src"" />
+                            <h3 class="affiche-title">movietitle</h3>
+                            <h4 class="affiche-format">movieQuality</h4>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        </div>
+</div>
