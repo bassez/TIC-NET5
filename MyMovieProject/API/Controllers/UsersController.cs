@@ -16,18 +16,26 @@ namespace API.Controllers
 
         private ApiDbContext db = new ApiDbContext();
 
+        public Func<Users, object> FormatUser = user => new {
+            id = user.Id,
+            pseudo = user.Pseudo,
+            email = user.Email,
+            birthdate = user.Birthdate,
+            dateCreated = user.Date_Created
+        };
+
         // GET api/users
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
             {
-                return new string[] { "user1", "user2" };
+                return Json(db.Users.Select(FormatUser));
             }
 
         // GET api/users/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
             {
-                return "user";
+                return Json(db.Users.Where(user => user.Id == id).Select(FormatUser).ToList()[0]);
             }
 
         // POST api/users
@@ -53,14 +61,21 @@ namespace API.Controllers
 
         // PUT api/users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string user)
+        public void Put(int id, [FromBody] Users  user)
             {
+
             }
 
         // DELETE api/users/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<string> Delete(int id)
             {
+                var user = db.Users.Where(u => u.Id == id);
+                var user_ = user.Select(FormatUser).ToList()[0];
+
+                db.Users.Remove(user.SingleOrDefault());
+                db.SaveChanges();
+                return Json(user_);
             }
     }
 }

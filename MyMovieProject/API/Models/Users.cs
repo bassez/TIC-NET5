@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 
 namespace API.Models
 {
+
     public class Users
     {
         public int Id { get; set; }
@@ -38,5 +39,10 @@ namespace API.Models
                 return hashedPassword;
             }
 
+        public Boolean ValidatePassword(String enteredPassword, String storedHash, String storedSalt)
+            {
+                var hash = HashPassword(enteredPassword, storedSalt);
+                return String.Equals(storedHash, hash);
+            }
     }
 }

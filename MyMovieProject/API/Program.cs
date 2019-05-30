@@ -16,21 +16,6 @@ namespace API
     {
         public static void Main(string[] args)
             {
-
-                // using (var db = new ApiDbContext())
-                // {
-                //     db.Movies.Add(new Movies { Name = "HEY HEY HEY" });
-                //     var count = db.SaveChanges();
-                //     Console.WriteLine("{0} records saved to database", count);
-
-                //     Console.WriteLine();
-                //     Console.WriteLine("All blogs in database:");
-                //     foreach (var movie in db.Movies)
-                //     {
-                //         Console.WriteLine(" - {0}", movie.Name);
-                //     }
-                // }
-
                 CreateWebHostBuilder(args).Build().Run();
             }
 
