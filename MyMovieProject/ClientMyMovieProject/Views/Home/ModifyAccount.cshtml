@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["idUser"] = ViewContext.RouteData.Values["id"];
+}
+
+<div class="modifiy-account-page">
+    <div class="connexion-wrapper">
+        <div class="modifyUser">
+            <h1>Modifier vos informations</h1>
+            <div class="input-wrapper">
+                <input class="register-log-input" type="text" placeholder="Email" />
+            </div>
+            <div class="input-wrapper">
+                <input class="register-log-input" type="text" placeholder="Identifiant" />
+            </div>
+            <div class="input-wrapper">
+                <input class="register-log-input" type="text" placeholder="Mot de passe" />
+            </div>
+            <div class="submit-wrapper">
+                <a class="delete-button">Supprimer le compte :(</a>
+                <a href="/Home/Register" class="modify-button">Modifier</a>
+            </div>
+        </div>
+    </div>
+</div>
