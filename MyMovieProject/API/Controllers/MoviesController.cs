@@ -10,7 +10,7 @@ namespace API.Controllers
 {
     [Route("api/movies")]
     [ApiController]
-    public class MoviesController : ControllerBase
+    public class MoviesController : Controller
     {
         private readonly ApiDbContext _context;
 
@@ -68,11 +68,11 @@ namespace API.Controllers
 
         // POST api/movies
         [HttpPost]
-        public IActionResult Post([FromForm]Movies movie)
+        public IActionResult Post([FromBody] Movies movie)
         {
             _context.Movies.Add(movie);
             _context.SaveChanges();
-            return Ok();
+            return Ok(Json(movie));
         }
 
         // PUT api/movies/5
