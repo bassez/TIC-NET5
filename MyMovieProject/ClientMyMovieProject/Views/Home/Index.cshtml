@@ -1,8 +1,90 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="home-page">
+        <img class="home-icon" src="~/img/blueLOGO.png" />
+        <h1 class="header-title display-4">
+            Bienvenue sur
+            <span class="colored">PiratesRhumStream</span> !
+        </h1>
+        <div class="home-search">
+            <input class="search-input" placeholder="Rechercher un film, exclus, blu-ray..." type="search" />
+            <img class="search-icon" src="https://static.thenounproject.com/png/101791-200.png" />
+        </div>
+        <div class="movies-container">
+            <div class="wrapper">
+                <a href="/Home/Movies/Exclus">
+                    <h1 class="colored">Exclus</h1>
+                </a>
+                <div class="wrapper-content">
+                    <div class="movies-affiche">
+                        <img class="affiche-img" src="http://fr.web.img3.acsta.net/c_215_290/pictures/19/04/04/09/04/0472053.jpg" />
+                        <h3 class="affiche-title">movietitle</h3>
+                        <h4 class="affiche-format">movieQuality</h4>
+                    </div>
+                    <div class="movies-affiche">
+                        <img class="affiche-img" src="http://fr.web.img3.acsta.net/c_215_290/pictures/19/04/04/09/04/0472053.jpg" />
+                        <h3 class="affiche-title">movietitle</h3>
+                        <h4 class="affiche-format">movieQuality</h4>
+                    </div>
+                    <div class="movies-affiche">
+                        <img class="affiche-img" src="http://fr.web.img3.acsta.net/c_215_290/pictures/19/04/04/09/04/0472053.jpg" />
+                        <h3 class="affiche-title">movietitle</h3>
+                        <h4 class="affiche-format">movieQuality</h4>
+                    </div>
+                    <div class="movies-affiche">
+                        <img class="affiche-img" src="http://fr.web.img3.acsta.net/c_215_290/pictures/19/04/04/09/04/0472053.jpg" />
+                        <h3 class="affiche-title">movietitle</h3>
+                        <h4 class="affiche-format">movieQuality</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper">
+                <a href="/Home/Movies/Blu-ray">
+                    <h1 class="colored">Dernier Blu-ray</h1>
+                </a>
+                <div class="wrapper-content">
+                    @for (int i = 0; i < 4; i++)
+                    {
+                        <div class="movies-affiche">
+                            <img class="affiche-img" src"" />
+                            <h3 class="affiche-title">movietitle</h3>
+                            <h4 class="affiche-format">movieQuality</h4>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="wrapper">
+                <a href="/Home/Movies/Vostfr">
+                    <h1 class="colored">Vostfr</h1>
+                </a>
+                <div class="wrapper-content">
+                    @for (int y = 0; y < 4; y++)
+                    {
+                        <div class="movies-affiche">
+                            <img class="affiche-img" src"" />
+                            <h3 class="affiche-title">movietitle</h3>
+                            <h4 class="affiche-format">movieQuality</h4>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="wrapper">
+                <a href="/Home/Movies/Oav">
+                    <h1 class="colored">OAV - Manga</h1>
+                </a>
+
+                <div class="wrapper-content">
+                    @for (int x = 0; x < 4; x++)
+                    {
+                        <div class="movies-affiche">
+                            <img class="affiche-img" src"" />
+                            <h3 class="affiche-title">movietitle</h3>
+                            <h4 class="affiche-format">movieQuality</h4>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>

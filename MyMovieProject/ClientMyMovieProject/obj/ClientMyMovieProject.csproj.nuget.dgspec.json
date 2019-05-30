@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\silve\\projects\\net5\\MyMovieProject\\ClientMyMovieProject\\ClientMyMovieProject.csproj": {}
+    "C:\\Users\\flo\\Desktop\\NY-TIC-NET5\\TIC-NET5\\MyMovieProject\\ClientMyMovieProject\\ClientMyMovieProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\silve\\projects\\net5\\MyMovieProject\\ClientMyMovieProject\\ClientMyMovieProject.csproj": {
+    "C:\\Users\\flo\\Desktop\\NY-TIC-NET5\\TIC-NET5\\MyMovieProject\\ClientMyMovieProject\\ClientMyMovieProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\silve\\projects\\net5\\MyMovieProject\\ClientMyMovieProject\\ClientMyMovieProject.csproj",
+        "projectUniqueName": "C:\\Users\\flo\\Desktop\\NY-TIC-NET5\\TIC-NET5\\MyMovieProject\\ClientMyMovieProject\\ClientMyMovieProject.csproj",
         "projectName": "ClientMyMovieProject",
-        "projectPath": "C:\\Users\\silve\\projects\\net5\\MyMovieProject\\ClientMyMovieProject\\ClientMyMovieProject.csproj",
-        "packagesPath": "C:\\Users\\silve\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\silve\\projects\\net5\\MyMovieProject\\ClientMyMovieProject\\obj\\",
+        "projectPath": "C:\\Users\\flo\\Desktop\\NY-TIC-NET5\\TIC-NET5\\MyMovieProject\\ClientMyMovieProject\\ClientMyMovieProject.csproj",
+        "packagesPath": "C:\\Users\\flo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\flo\\Desktop\\NY-TIC-NET5\\TIC-NET5\\MyMovieProject\\ClientMyMovieProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\silve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\flo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

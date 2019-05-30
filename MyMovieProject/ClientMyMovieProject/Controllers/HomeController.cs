@@ -14,6 +14,20 @@ namespace ClientMyMovieProject.Controllers
         {
             return View();
         }
+        public IActionResult Movies()
+        {
+            return View();
+        }
+
+        public IActionResult MovieDetail()
+        {
+            return View();
+        }
+
+        public IActionResult Account()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
