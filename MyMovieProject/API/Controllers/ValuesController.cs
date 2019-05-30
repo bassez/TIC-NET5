@@ -11,20 +11,29 @@ namespace API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ApiDbContext _context;
+
+        public ValuesController(ApiDbContext context)
+        {
+            _context = context;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var Movies = _context.Movies;
+            return Ok(Movies);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            if (id == 1)
+            var Movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+            if (Movie != null)
             {
-                return Ok(new Movies() { Id = 1, Name = "Endgame", Category = "Action" });
+                return Ok(Movie);
             } else
             {
                 return NotFound();
@@ -33,20 +42,45 @@ namespace API.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] Movies value)
+        public IActionResult Post(Movies movie)
         {
+            _context.Movies.Add(movie);
+            _context.SaveChanges();
+            return Ok();
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(Movies movie)
         {
+            var Movie = _context.Movies.FirstOrDefault(m => m.Id == movie.Id);
+            if (Movie != null)
+            {
+                _context.Movies.Update(movie);
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(Movies movie)
         {
+            var Movie = _context.Movies.FirstOrDefault(m => m.Id == movie.Id);
+            if (Movie != null)
+            {
+                _context.Movies.Remove(movie);
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

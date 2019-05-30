@@ -13,5 +13,10 @@ namespace API.Models
         public string Password { get; set; }
         public DateTime Birthdate { get; set; }
         public DateTime Date_Created { get; set; }
+
+        // FK
+        public Notes Notes { get; set; }
+        public Comments Comments { get; set; }
+        public Likes Likes { get; set; }
     }
 }
