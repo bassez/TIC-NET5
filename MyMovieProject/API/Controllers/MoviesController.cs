@@ -12,18 +12,18 @@ namespace API.Controllers
     [ApiController]
     public class MoviesController : Controller
     {
-        private readonly ApiDbContext _context;
+        private readonly ApiDbContext db;
 
         public MoviesController(ApiDbContext context)
         {
-            _context = context;
+            db = context;
         }
 
         // GET api/movies
         [HttpGet]
         public IActionResult Get()
         {
-            var movies = _context.Movies;
+            var movies = db.Movies;
             return Ok(movies);
         }
 
@@ -31,7 +31,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+            var movie = db.Movies.FirstOrDefault(m => m.Id == id);
             if (movie != null)
             {
                 return Ok(movie);
@@ -45,7 +45,7 @@ namespace API.Controllers
         [HttpPost("search")]
         public IActionResult GetByName([FromForm]string name)
         {
-            var movies = _context.Movies;
+            var movies = db.Movies;
             ICollection<Movies> returnedMovies = null;
 
             foreach(Movies m in movies)
@@ -70,8 +70,8 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Movies movie)
         {
-            _context.Movies.Add(movie);
-            _context.SaveChanges();
+            db.Movies.Add(movie);
+            db.SaveChanges();
             return Ok(Json(movie));
         }
 
@@ -79,11 +79,11 @@ namespace API.Controllers
         [HttpPut]
         public IActionResult Put([FromForm]Movies movie)
         {
-            var Movie = _context.Movies.FirstOrDefault(m => m.Id == movie.Id);
+            var Movie = db.Movies.FirstOrDefault(m => m.Id == movie.Id);
             if (Movie != null)
             {
-                _context.Movies.Update(movie);
-                _context.SaveChanges();
+                db.Movies.Update(movie);
+                db.SaveChanges();
                 return Ok();
             }
             else
@@ -96,11 +96,11 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+            var movie = db.Movies.FirstOrDefault(m => m.Id == id);
             if (movie != null)
             {
-                _context.Movies.Remove(movie);
-                _context.SaveChanges();
+                db.Movies.Remove(movie);
+                db.SaveChanges();
                 return Ok();
             }
             else
