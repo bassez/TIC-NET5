@@ -7,51 +7,51 @@ using API.Models;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/movies")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class MoviesController : ControllerBase
     {
         private readonly ApiDbContext _context;
 
-        public ValuesController(ApiDbContext context)
+        public MoviesController(ApiDbContext context)
         {
             _context = context;
         }
 
-        // GET api/values
+        // GET api/movies
         [HttpGet]
         public IActionResult Get()
         {
-            var Movies = _context.Movies;
-            return Ok(Movies);
+            var movies = _context.Movies;
+            return Ok(movies);
         }
 
-        // GET api/values/5
+        // GET api/movies/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var Movie = _context.Movies.FirstOrDefault(m => m.Id == id);
-            if (Movie != null)
+            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+            if (movie != null)
             {
-                return Ok(Movie);
+                return Ok(movie);
             } else
             {
                 return NotFound();
             }
         }
 
-        // POST api/values
+        // POST api/movies
         [HttpPost]
-        public IActionResult Post(Movies movie)
+        public IActionResult Post([FromForm]Movies movie)
         {
             _context.Movies.Add(movie);
             _context.SaveChanges();
             return Ok();
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(Movies movie)
+        // PUT api/movies/5
+        [HttpPut]
+        public IActionResult Put([FromForm]Movies movie)
         {
             var Movie = _context.Movies.FirstOrDefault(m => m.Id == movie.Id);
             if (Movie != null)
@@ -66,12 +66,12 @@ namespace API.Controllers
             }
         }
 
-        // DELETE api/values/5
+        // DELETE api/movies/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Movies movie)
+        public IActionResult Delete(int id)
         {
-            var Movie = _context.Movies.FirstOrDefault(m => m.Id == movie.Id);
-            if (Movie != null)
+            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+            if (movie != null)
             {
                 _context.Movies.Remove(movie);
                 _context.SaveChanges();
