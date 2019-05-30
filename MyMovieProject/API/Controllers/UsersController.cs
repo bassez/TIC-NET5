@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,13 +34,21 @@ namespace API.Controllers
         [HttpPost]
         public  ActionResult<string> Post([FromBody] Users user)
             {
+                var salt = Users.GenSalt();
+                var hashedPassword = Users.HashPassword(user.Password, salt);
+
                 var _user = new Users {
                     Pseudo = user.Pseudo,
-                    Email = user.Email
+                    Email = user.Email,
+                    Password = hashedPassword,
+                    Salt = salt,
+                    Birthdate = user.Birthdate,
+                    Date_Created = System.DateTime.Now
                 };
                 db.Users.Add(_user);
                 db.SaveChanges();
-                return Json(user);
+
+                return Json(_user);
             }
 
         // PUT api/users/5
