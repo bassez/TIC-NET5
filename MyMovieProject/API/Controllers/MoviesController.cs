@@ -40,6 +40,31 @@ namespace API.Controllers
             }
         }
 
+        // GET api/movies/search
+        [HttpPost("search")]
+        public IActionResult GetByName([FromForm]string name)
+        {
+            var movies = _context.Movies;
+            ICollection<Movies> returnedMovies = null;
+
+            foreach(Movies m in movies)
+            {
+                if (m.Name.Contains(name))
+                {
+                    returnedMovies.Add(m);
+                }
+            }
+
+            if (returnedMovies != null)
+            {
+                return Ok(returnedMovies);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         // POST api/movies
         [HttpPost]
         public IActionResult Post([FromForm]Movies movie)
