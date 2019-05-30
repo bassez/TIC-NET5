@@ -40,7 +40,7 @@ namespace API.Controllers
 
         // POST api/users
         [HttpPost]
-        public  ActionResult<string> Post([FromBody] Users user)
+        public ActionResult<string> Post([FromBody] Users user)
             {
                 var salt = Users.GenSalt();
                 var hashedPassword = Users.HashPassword(user.Password, salt);
@@ -58,6 +58,23 @@ namespace API.Controllers
 
                 return Json(_user);
             }
+
+
+
+        [HttpPost("authenticate")]
+        public ActionResult<string> Authenticate([FromBody] Users userParam)
+            {
+                var user = db.Users.Where(u => u.Email == userParam.Email).ToList()[0];
+
+                if (user == null)
+                    return BadRequest(new { message = "Username or password is incorrect" });
+
+                if (Users.ValidatePassword(userParam.Password, user.Password, user.Salt))
+                    return Ok(Json(user));
+                else
+                    return Unauthorized(new {message = "Bad email or password"});
+            }
+
 
         // PUT api/users/5
         [HttpPut("{id}")]
