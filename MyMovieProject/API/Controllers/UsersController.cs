@@ -1,19 +1,26 @@
 ﻿using System;
+using System.Text;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 using API.Models;
 
 namespace API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : Controller
     {
-
+        private string JwtSecret = "S3(r3tT051GN_JWT";
         private ApiDbContext db = new ApiDbContext();
 
         public Func<Users, object> FormatUser = user => new {
@@ -28,6 +35,7 @@ namespace API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
             {
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n");
                 return Json(db.Users.Select(FormatUser));
             }
 
@@ -35,10 +43,11 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
             {
-                return Json(db.Users.Where(user => user.Id == id).Select(FormatUser).ToList()[0]);
+                return Json(db.Users.Where(u => u.Id == id).Select(FormatUser).ToList()[0]);
             }
 
         // POST api/users
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult<string> Post([FromBody] Users user)
             {
@@ -56,11 +65,14 @@ namespace API.Controllers
                 db.Users.Add(_user);
                 db.SaveChanges();
 
-                return Json(_user);
+                var savedUser = db.Users.Where(u => u.Id == _user.Id).Select(FormatUser).ToList()[0];
+
+                return Json(savedUser);
             }
 
 
 
+        [AllowAnonymous]
         [HttpPost("authenticate")]
         public ActionResult<string> Authenticate([FromBody] Users userParam)
             {
@@ -68,11 +80,32 @@ namespace API.Controllers
 
                 if (user == null)
                     return BadRequest(new { message = "Username or password is incorrect" });
-
-                if (Users.ValidatePassword(userParam.Password, user.Password, user.Salt))
-                    return Ok(Json(user));
-                else
+                else if (!Users.ValidatePassword(userParam.Password, user.Password, user.Salt))
                     return Unauthorized(new {message = "Bad email or password"});
+
+
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(JwtSecret);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[] {
+                            new Claim(ClaimTypes.Name, user.Id.ToString())
+                        }),
+                    Expires = DateTime.UtcNow.AddDays(7),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var tokenString = tokenHandler.WriteToken(token);
+
+                // return basic user info (without password) and token to store client side
+                return Ok(new {
+                        Id = user.Id,
+                        Pseudo = user.Pseudo,
+                        Email = user.Email,
+                        Birthdate = user.Birthdate,
+                        Token = tokenString
+                    });
             }
 
 

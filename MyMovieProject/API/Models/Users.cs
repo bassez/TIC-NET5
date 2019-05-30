@@ -12,6 +12,7 @@ namespace API.Models
     {
         public int Id { get; set; }
         public string Pseudo { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
@@ -19,9 +20,9 @@ namespace API.Models
         public DateTime Date_Created { get; set; }
 
         // FK
-        public Notes Notes { get; set; }
-        public Comments Comments { get; set; }
-        public Likes Likes { get; set; }
+        // public Notes Notes { get; set; }
+        // public Comments Comments { get; set; }
+        // public Likes Likes { get; set; }
 
 
         public static string GenSalt(int size = 12) {
