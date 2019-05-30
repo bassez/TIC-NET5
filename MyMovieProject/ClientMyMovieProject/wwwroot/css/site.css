@@ -316,3 +316,59 @@ section ul li:hover {
 }
 
 
+/* ========================================*/
+/* ========== Register Sign in PAGE =======*/
+/* ========================================*/
+
+.connexion-wrapper{
+    height:100%;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.connexion {
+    margin-top: 200px;
+    height: 400px;
+    width: 550px;
+    border: solid 1px #1890ff;
+    border-radius: 5px;
+    padding: 50px;
+}
+
+.input-wrapper {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.register-log-input {
+    width: 100%;
+    padding: 3px 8px;
+}
+.submit-wrapper {
+    width: 100%;
+    display:flex;
+    justify-content: flex-end;
+}
+.submit-button:not(:last-child){
+    margin-right:20px;
+}
+.submit-button {
+    background-color: #1890ff;
+    color:white;
+    font-family:Montserrat;
+    border-radius:3px;
+    padding:5px 10px;
+}
+.submit-button:hover {
+    cursor: pointer;
+    background-color: #1890ff99;
+}
+
+
+
+
+
+
+
