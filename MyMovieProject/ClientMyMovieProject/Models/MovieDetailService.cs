@@ -11,9 +11,10 @@ namespace PiratesRhumStream.Models
     {
         HttpClient _client = new HttpClient();
         public MovieDetailService Get(int id) {
-            var resp = _client.GetAsync("hhtp" + id).Result;
-            if (resp.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<MovieDetailService>(resp.Content.ReadAsStringAsync().Result);
+            // TODO BOEHM
+            //var resp = _client.GetAsync("hhtp" + id).Result;
+            //if (resp.IsSuccessStatusCode)
+                //return JsonConvert.DeserializeObject<MovieDetailService>(resp.Content.ReadAsStringAsync().Result);
             return null;
         }
     }

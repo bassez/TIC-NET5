@@ -4,16 +4,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ClientMyMovieProject.Models;
 using PiratesRhumStream.Models;
 
 namespace ClientMyMovieProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly MovieDetailService _service;
-        public HomeController(MovieDetailService service) {
-            _service = service;
-        }
+        //private readonly MovieDetailService _service;
+        //public HomeController(MovieDetailService service) {
+            //_service = service;
+        //}
         public IActionResult Index()
         {
             return View();
@@ -23,9 +24,16 @@ namespace ClientMyMovieProject.Controllers
             return View();
         }
 
+        public IActionResult Search()
+        {
+            return View();
+        }
+
         public IActionResult MovieDetail()
         {
-            return View(_service.Get(1));
+            //return View(_service.Get(1));
+            return View();
+ 
         }
 
         public IActionResult ModifyAccount()
