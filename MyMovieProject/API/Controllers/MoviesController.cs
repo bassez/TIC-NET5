@@ -42,14 +42,16 @@ namespace API.Controllers
 
         // GET api/movies/search
         [HttpPost("search")]
-        public IActionResult GetByName([FromForm]string name)
+        public IActionResult GetByName(string name)
         {
+            if (name == null) { return NotFound(); }
             var movies = _context.Movies;
             ICollection<Movies> returnedMovies = null;
+            Console.WriteLine(name);
 
             foreach(Movies m in movies)
             {
-                if (m.Name.Contains(name))
+                if ((m.Name).Contains(name))
                 {
                     returnedMovies.Add(m);
                 }
