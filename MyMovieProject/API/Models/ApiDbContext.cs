@@ -18,6 +18,7 @@ namespace API.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
+                //     optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=MyDatabase;Integrated Security=True;Pooling=False");
                 optionsBuilder.UseSqlite("Data Source=net5.db");
             }
     }

@@ -3,29 +3,25 @@ using System;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20190530105405_init")]
-    partial class init
+    [Migration("20190530233007_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
             modelBuilder.Entity("API.Models.Comments", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Body");
 
@@ -45,8 +41,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Likes", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("value");
 
@@ -58,8 +53,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Movies", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Category");
 
@@ -97,8 +91,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Notes", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("Value");
 
@@ -110,32 +103,21 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Users", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Birthdate");
-
-                    b.Property<int?>("CommentsId");
 
                     b.Property<DateTime>("Date_Created");
 
                     b.Property<string>("Email");
 
-                    b.Property<int?>("LikesId");
-
-                    b.Property<int?>("NotesId");
-
                     b.Property<string>("Password");
 
                     b.Property<string>("Pseudo");
 
+                    b.Property<string>("Salt");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentsId");
-
-                    b.HasIndex("LikesId");
-
-                    b.HasIndex("NotesId");
 
                     b.ToTable("Users");
                 });
@@ -152,21 +134,6 @@ namespace API.Migrations
                 });
 
             modelBuilder.Entity("API.Models.Movies", b =>
-                {
-                    b.HasOne("API.Models.Comments", "Comments")
-                        .WithMany()
-                        .HasForeignKey("CommentsId");
-
-                    b.HasOne("API.Models.Likes", "Likes")
-                        .WithMany()
-                        .HasForeignKey("LikesId");
-
-                    b.HasOne("API.Models.Notes", "Notes")
-                        .WithMany()
-                        .HasForeignKey("NotesId");
-                });
-
-            modelBuilder.Entity("API.Models.Users", b =>
                 {
                     b.HasOne("API.Models.Comments", "Comments")
                         .WithMany()

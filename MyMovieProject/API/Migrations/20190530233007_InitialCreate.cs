@@ -1,10 +1,9 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +12,7 @@ namespace API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     value = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -26,7 +25,7 @@ namespace API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Value = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -35,11 +34,29 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Pseudo = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Salt = table.Column<string>(nullable: true),
+                    Birthdate = table.Column<DateTime>(nullable: false),
+                    Date_Created = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Body = table.Column<string>(nullable: true),
                     NotesId = table.Column<int>(nullable: true),
                     CommentsChildrenId = table.Column<int>(nullable: true)
@@ -66,7 +83,7 @@ namespace API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Category = table.Column<string>(nullable: true),
@@ -102,44 +119,6 @@ namespace API.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Pseudo = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    Birthdate = table.Column<DateTime>(nullable: false),
-                    Date_Created = table.Column<DateTime>(nullable: false),
-                    NotesId = table.Column<int>(nullable: true),
-                    CommentsId = table.Column<int>(nullable: true),
-                    LikesId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Comments_CommentsId",
-                        column: x => x.CommentsId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Users_Likes_LikesId",
-                        column: x => x.LikesId,
-                        principalTable: "Likes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Users_Notes_NotesId",
-                        column: x => x.NotesId,
-                        principalTable: "Notes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_CommentsChildrenId",
                 table: "Comments",
@@ -163,21 +142,6 @@ namespace API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Movies_NotesId",
                 table: "Movies",
-                column: "NotesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_CommentsId",
-                table: "Users",
-                column: "CommentsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_LikesId",
-                table: "Users",
-                column: "LikesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_NotesId",
-                table: "Users",
                 column: "NotesId");
         }
 
