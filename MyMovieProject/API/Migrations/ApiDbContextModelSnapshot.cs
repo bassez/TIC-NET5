@@ -3,6 +3,7 @@ using System;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
@@ -11,53 +12,173 @@ namespace API.Migrations
     partial class ApiDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
-        {
+            {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+                modelBuilder
+                    .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                    .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("API.Models.Movies", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                modelBuilder.Entity("API.Models.Comments", b =>
+                                    {
+                                        b.Property<int>("Id")
+                                        .ValueGeneratedOnAdd()
+                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category");
+                                        b.Property<string>("Body");
 
-                    b.Property<DateTime>("Date_Publised");
+                                        b.Property<int?>("CommentsChildrenId");
 
-                    b.Property<string>("Description");
+                                        b.Property<int?>("NotesId");
 
-                    b.Property<string>("Name");
+                                        b.HasKey("Id");
 
-                    b.Property<string>("Publisher");
+                                        b.HasIndex("CommentsChildrenId");
 
-                    b.HasKey("Id");
+                                        b.HasIndex("NotesId");
 
-                    b.ToTable("Movies");
-                });
+                                        b.ToTable("Comments");
+                                    });
 
-            modelBuilder.Entity("API.Models.Users", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                modelBuilder.Entity("API.Models.Likes", b =>
+                                    {
+                                        b.Property<int>("Id")
+                                        .ValueGeneratedOnAdd()
+                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Birthdate");
+                                        b.Property<bool>("value");
 
-                    b.Property<DateTime>("Date_Created");
+                                        b.HasKey("Id");
 
-                    b.Property<string>("Email");
+                                        b.ToTable("Likes");
+                                    });
 
-                    b.Property<string>("Password");
+                modelBuilder.Entity("API.Models.Movies", b =>
+                                    {
+                                        b.Property<int>("Id")
+                                        .ValueGeneratedOnAdd()
+                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Pseudo");
+                                        b.Property<string>("Category");
 
-                    b.Property<string>("Salt");
+                                        b.Property<int?>("CommentsId");
 
-                    b.HasKey("Id");
+                                        b.Property<DateTime>("Date_Publised");
 
-                    b.ToTable("Users");
-                });
+                                        b.Property<string>("Description");
+
+                                        b.Property<string>("Image");
+
+                                        b.Property<int>("Length");
+
+                                        b.Property<int?>("LikesId");
+
+                                        b.Property<string>("Name");
+
+                                        b.Property<int?>("NotesId");
+
+                                        b.Property<string>("Publisher");
+
+                                        b.Property<string>("Type");
+
+                                        b.HasKey("Id");
+
+                                        b.HasIndex("CommentsId");
+
+                                        b.HasIndex("LikesId");
+
+                                        b.HasIndex("NotesId");
+
+                                        b.ToTable("Movies");
+                                    });
+
+                modelBuilder.Entity("API.Models.Notes", b =>
+                                    {
+                                        b.Property<int>("Id")
+                                        .ValueGeneratedOnAdd()
+                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                                        b.Property<decimal>("Value");
+
+                                        b.HasKey("Id");
+
+                                        b.ToTable("Notes");
+                                    });
+
+                modelBuilder.Entity("API.Models.Users", b =>
+                                    {
+                                        b.Property<int>("Id")
+                                        .ValueGeneratedOnAdd()
+                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                                        b.Property<DateTime>("Birthdate");
+
+                                        b.Property<int?>("CommentsId");
+
+                                        b.Property<DateTime>("Date_Created");
+
+                                        b.Property<string>("Email");
+
+                                        b.Property<int?>("LikesId");
+
+                                        b.Property<int?>("NotesId");
+
+                                        b.Property<string>("Password");
+
+                                        b.Property<string>("Pseudo");
+
+                                        b.HasKey("Id");
+
+                                        b.HasIndex("CommentsId");
+
+                                        b.HasIndex("LikesId");
+
+                                        b.HasIndex("NotesId");
+
+                                        b.ToTable("Users");
+                                    });
+
+                modelBuilder.Entity("API.Models.Comments", b =>
+                                    {
+                                        b.HasOne("API.Models.Comments", "CommentsChildren")
+                                        .WithMany()
+                                        .HasForeignKey("CommentsChildrenId");
+
+                                        b.HasOne("API.Models.Notes", "Notes")
+                                        .WithMany()
+                                        .HasForeignKey("NotesId");
+                                    });
+
+                modelBuilder.Entity("API.Models.Movies", b =>
+                                    {
+                                        b.HasOne("API.Models.Comments", "Comments")
+                                        .WithMany()
+                                        .HasForeignKey("CommentsId");
+
+                                        b.HasOne("API.Models.Likes", "Likes")
+                                        .WithMany()
+                                        .HasForeignKey("LikesId");
+
+                                        b.HasOne("API.Models.Notes", "Notes")
+                                        .WithMany()
+                                        .HasForeignKey("NotesId");
+                                    });
+
+                modelBuilder.Entity("API.Models.Users", b =>
+                                    {
+                                        b.HasOne("API.Models.Comments", "Comments")
+                                        .WithMany()
+                                        .HasForeignKey("CommentsId");
+
+                                        b.HasOne("API.Models.Likes", "Likes")
+                                        .WithMany()
+                                        .HasForeignKey("LikesId");
+
+                                        b.HasOne("API.Models.Notes", "Notes")
+                                        .WithMany()
+                                        .HasForeignKey("NotesId");
+                                    });
 #pragma warning restore 612, 618
-        }
+            }
     }
 }

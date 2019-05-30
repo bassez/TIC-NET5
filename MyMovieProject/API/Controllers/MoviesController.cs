@@ -8,47 +8,105 @@ using API.Models;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/movies")]
     [ApiController]
-    public class MoviesController : Controller
+    public class MoviesController : ControllerBase
     {
+        private readonly ApiDbContext _context;
+
+        public MoviesController(ApiDbContext context)
+        {
+            _context = context;
+        }
+
         // GET api/movies
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-            {
-                return new string[] { "movie1", "movie2" };
-            }
+        public IActionResult Get()
+        {
+            var movies = _context.Movies;
+            return Ok(movies);
+        }
 
         // GET api/movies/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public IActionResult Get(int id)
+        {
+            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+            if (movie != null)
             {
-                if (id == 1)
+                return Ok(movie);
+            } else
+            {
+                return NotFound();
+            }
+        }
+
+        // GET api/movies/search
+        [HttpPost("search")]
+        public IActionResult GetByName([FromForm]string name)
+        {
+            var movies = _context.Movies;
+            ICollection<Movies> returnedMovies = null;
+
+            foreach(Movies m in movies)
+            {
+                if (m.Name.Contains(name))
                 {
-                    return Ok(new Movies() { Id = 1, Name = "Endgame", Category = "Action" });
-                } else
-                {
-                    return NotFound();
+                    returnedMovies.Add(m);
                 }
             }
 
+            if (returnedMovies != null)
+            {
+                return Ok(returnedMovies);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         // POST api/movies
         [HttpPost]
-        public ActionResult<string> Post([FromBody] string movie)
-            {
-                return Ok("Created");
-            }
+        public IActionResult Post([FromForm]Movies movie)
+        {
+            _context.Movies.Add(movie);
+            _context.SaveChanges();
+            return Ok();
+        }
 
         // PUT api/movies/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string movie)
+        [HttpPut]
+        public IActionResult Put([FromForm]Movies movie)
+        {
+            var Movie = _context.Movies.FirstOrDefault(m => m.Id == movie.Id);
+            if (Movie != null)
             {
+                _context.Movies.Update(movie);
+                _context.SaveChanges();
+                return Ok();
             }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         // DELETE api/movies/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
+        {
+            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+            if (movie != null)
             {
+                _context.Movies.Remove(movie);
+                _context.SaveChanges();
+                return Ok();
             }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
