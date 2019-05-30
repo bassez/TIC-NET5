@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Movies Page";
+}
+
+    <div class="account-page">
+        <img class="home-icon" src="~/img/blueLOGO.png" />
+        <div>
+            <img class="home-icon" src="~/img/blueLOGO.png" />
+            <h1 class="header-title display-4">
+                Mon espace de pirate
+            </h1>
+        </div>
+        <div class="account-wrapper">
+            <div class="user-info">
+                <h2 class="user-name">User : John Doe</h2>
+                <h2 class="user-mail">Mail : John@Doe.com</h2>
+            </div>
+            <div class="user-favorites">
+                <h1 class="header-title display-4">
+                    Mes films préférés
+                </h1>
+                <div class="movies-container">
+                    @for (int i = 0; i < 2; i++)
+                    {
+                        <div class="wrapper">
+                            <div class="wrapper-content">
+                                @for (int y = 0; y < 4; y++)
+                                {
+                                    <div class="movies-affiche">
+                                        <img class="affiche-img" src="" />
+                                        <h3 class="affiche-title">movietitle</h3>
+                                        <h4 class="affiche-format">movieQuality</h4>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="user-favorites">
+                <h1 class="header-title display-4">
+                    Mes notes
+                </h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2">Titre du film</th>
+                            <th colspan="2">Votre note</th>
+                            <th colspan="2">Moyenne du film</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Avenger</td>
+                            <td>5/20</td>
+                            <td>16/20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
