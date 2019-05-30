@@ -30,10 +30,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            var connection = "Data Source=net5.db";
-            services.AddDbContext<ApiDbContext>
-                (options => options.UseSqlite(connection));
+            services.AddDbContext<ApiDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

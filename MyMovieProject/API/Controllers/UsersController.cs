@@ -12,6 +12,9 @@ namespace API.Controllers
     [ApiController]
     public class UsersController : Controller
     {
+
+        private ApiDbContext db = new ApiDbContext();
+
         // GET api/users
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -30,6 +33,12 @@ namespace API.Controllers
         [HttpPost]
         public  ActionResult<string> Post([FromBody] Users user)
             {
+                var _user = new Users {
+                    Pseudo = user.Pseudo,
+                    Email = user.Email
+                };
+                db.Users.Add(_user);
+                db.SaveChanges();
                 return Json(user);
             }
 

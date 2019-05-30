@@ -8,9 +8,6 @@ namespace API.Models
 {
     public class ApiDbContext : DbContext
     {
-        // public ApiDbContext(DbContextOptions options) : base(options)
-        //     {
-        //     }
 
         public DbSet<Movies> Movies { get; set; }
         public DbSet<Users> Users { get; set; }
