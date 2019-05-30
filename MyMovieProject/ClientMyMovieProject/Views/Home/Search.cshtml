@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["title"] = ViewContext.RouteData.Values["id"];
+    ViewData["search"] = ViewContext.RouteData.Values["id"];
 }
 
 
     <div class="movies-page">
         <img class="home-icon" src="~/img/blueLOGO.png" />
-        <h1 class="colored header-title display-4">@ViewData["title"]</h1>
+        <h1 class="colored header-title display-4">@ViewData["search"]</h1>
         <div class="movies-container">
             @for (int i = 0; i < 4; i++)
             {
