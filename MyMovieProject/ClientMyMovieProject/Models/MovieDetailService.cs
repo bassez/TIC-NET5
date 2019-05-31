@@ -34,8 +34,7 @@ namespace PiratesRhumStream.Models
 
         public MovieDetail[] GetMoviesByType(string type)
         {
-            var url = "http://localhost:5000/api/movies/?type=" + type;
-            //  OU var url = "http://localhost:5000/api/movies/" + type;
+            var url = "http://localhost:5000/api/movies/getbytype/?type=" + type;
             HttpResponseMessage resp = _client.GetAsync(url).Result;
             if (resp.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<MovieDetail[]>(resp.Content.ReadAsStringAsync().Result);
@@ -44,13 +43,11 @@ namespace PiratesRhumStream.Models
 
         public MovieDetail[] GetMoviesByTypeLimited(string type)
         {
-            var url = "http://localhost:5000/api/getmoviesbytypelimited/" + type;
+            var url = "http://localhost:5000/api/movies/getmoviesbytypelimited/?type=" + type;
             HttpResponseMessage resp = _client.GetAsync(url).Result;
             if (resp.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<MovieDetail[]>(resp.Content.ReadAsStringAsync().Result);
             return null;
         }
-
-       
     }
 }
