@@ -31,7 +31,7 @@ namespace API.Controllers
         [HttpGet("pages")]
         public IActionResult Get(int start = 0 , int end = 10)
             {
-                var movies = db.Movies.Select((movie, i) => i >= start && i <= end);
+                var movies = db.Movies.Where(m => m.Id >= start && m.Id <= end);
                 return Ok(movies);
             }
 
