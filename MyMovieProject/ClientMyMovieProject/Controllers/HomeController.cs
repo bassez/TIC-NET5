@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -77,6 +78,7 @@ namespace ClientMyMovieProject.Controllers
         [HttpPost]
         public IActionResult Signin(Users user)
             {
+
                 HttpClient client = new HttpClient();
                 var url = "http://localhost:5000/api/users/authenticate";
                 var _user = Newtonsoft.Json.JsonConvert.SerializeObject(user);
@@ -88,10 +90,10 @@ namespace ClientMyMovieProject.Controllers
                 JObject jsonRes = JObject.Parse(contents);
 
                 Console.WriteLine("NOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPE");
-                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(jsonRes));
+                Console.WriteLine(jsonRes["token"]);
 
                 if (result.IsSuccessStatusCode) {
-                    // HttpContext.Current.Session["JWT"] = contents.token;
+                    System.Web.HttpContext.Current.Session["JWT"] = jsonRes["token"];
                     return Redirect("/Home");
                 } else {
                     return View();
