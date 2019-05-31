@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using Newtonsoft.Json;
 
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 
 namespace ClientMyMovieProject.Controllers
@@ -24,7 +25,7 @@ namespace ClientMyMovieProject.Controllers
         //private readonly SearchService _searchSrv;
         //TODO REPLACE CONSTRUCTOR
         //public HomeController(MovieDetailService _movieDetailService, CommentService _commentService, SearchService _searchService)
-        
+
         public HomeController(MovieDetailService _movieDetailService) {
             _movieSrv = _movieDetailService;
             //_commentSrv = _commentService;
@@ -72,7 +73,7 @@ namespace ClientMyMovieProject.Controllers
 
         public IActionResult Account()
             {
-                return View();
+                    return View();
             }
 
 
@@ -112,11 +113,8 @@ namespace ClientMyMovieProject.Controllers
 
                 JObject jsonRes = JObject.Parse(contents);
 
-                Console.WriteLine("NOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPE");
-                Console.WriteLine(jsonRes["token"]);
-
                 if (result.IsSuccessStatusCode) {
-                    System.Web.HttpContext.Current.Session["JWT"] = jsonRes["token"];
+                    HttpContext.Session.SetString("JWT", jsonRes["token"].ToString());
                     return Redirect("/Home");
                 } else {
                     return View();
