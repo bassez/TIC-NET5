@@ -14,6 +14,10 @@
                 <div class="modify-wrapper">
                     <a href="/Home/ModifyAccount" class="modify-button">Modifier</a>
                 </div>
+                @using (Html.BeginForm("Signout", "Home", FormMethod.Post))
+                {
+                    <input class="submit-button" type="submit" value="Signout" />
+                    }
             </div>
             <div class="user-favorites">
                 <h1 class="header-title display-4">
@@ -31,10 +35,10 @@
                                         <h3 class="affiche-title">movietitle</h3>
                                         <h4 class="affiche-format">movieQuality</h4>
                                     </div>
-                                }
+                                    }
                             </div>
                         </div>
-                    }
+                        }
                 </div>
             </div>
             <div class="user-notes">
