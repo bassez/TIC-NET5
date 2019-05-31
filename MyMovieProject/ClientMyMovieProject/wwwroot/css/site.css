@@ -119,6 +119,7 @@ body {
 .wrapper-content {
     width: 100%;
     display: flex;
+    flex-wrap:wrap;
     justify-content: center;
     align-content: center;
     padding-top: 35px;
@@ -126,11 +127,12 @@ body {
 
 .movies-affiche {
     margin-right: 60px;
+    margin-bottom: 60px;
     height: 300px;
     width: 170px;
     display: flex;
     flex-direction: column;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 
@@ -148,6 +150,9 @@ body {
 .affiche-format {
     height: 30px;
     text-align: center;
+}
+.notation {
+    display:flex;
 }
 
 

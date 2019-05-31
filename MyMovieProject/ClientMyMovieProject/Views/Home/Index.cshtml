@@ -13,78 +13,69 @@
             <img class="search-icon" src="https://static.thenounproject.com/png/101791-200.png" />
         </div>
         <div class="movies-container">
-            <div class="wrapper">
-                <a href="/Home/Movies/Exclus">
-                    <h1 class="colored">Exclus</h1>
-                </a>
-                <div class="wrapper-content">
-                    <div class="movies-affiche">
-                        <img class="affiche-img" src="http://fr.web.img3.acsta.net/c_215_290/pictures/19/04/04/09/04/0472053.jpg" />
-                        <h3 class="affiche-title">movietitle</h3>
-                        <h4 class="affiche-format">movieQuality</h4>
-                    </div>
-                    <div class="movies-affiche">
-                        <img class="affiche-img" src="http://fr.web.img3.acsta.net/c_215_290/pictures/19/04/04/09/04/0472053.jpg" />
-                        <h3 class="affiche-title">movietitle</h3>
-                        <h4 class="affiche-format">movieQuality</h4>
-                    </div>
-                    <div class="movies-affiche">
-                        <img class="affiche-img" src="http://fr.web.img3.acsta.net/c_215_290/pictures/19/04/04/09/04/0472053.jpg" />
-                        <h3 class="affiche-title">movietitle</h3>
-                        <h4 class="affiche-format">movieQuality</h4>
-                    </div>
-                    <div class="movies-affiche">
-                        <img class="affiche-img" src="http://fr.web.img3.acsta.net/c_215_290/pictures/19/04/04/09/04/0472053.jpg" />
-                        <h3 class="affiche-title">movietitle</h3>
-                        <h4 class="affiche-format">movieQuality</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="wrapper">
-                <a href="/Home/Movies/Blu-ray">
-                    <h1 class="colored">Dernier Blu-ray</h1>
-                </a>
-                <div class="wrapper-content">
-                    @for (int i = 0; i < 4; i++)
-                    {
-                        <div class="movies-affiche">
-                            <img class="affiche-img" src"" />
-                            <h3 class="affiche-title">movietitle</h3>
-                            <h4 class="affiche-format">movieQuality</h4>
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="wrapper">
-                <a href="/Home/Movies/Vostfr">
-                    <h1 class="colored">Vostfr</h1>
-                </a>
-                <div class="wrapper-content">
-                    @for (int y = 0; y < 4; y++)
-                    {
-                        <div class="movies-affiche">
-                            <img class="affiche-img" src"" />
-                            <h3 class="affiche-title">movietitle</h3>
-                            <h4 class="affiche-format">movieQuality</h4>
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="wrapper">
-                <a href="/Home/Movies/Oav">
-                    <h1 class="colored">OAV - Manga</h1>
-                </a>
+            @foreach (var moviesExclus in Model.exclus)
+            {
+                <div class="wrapper">
+                    <a href="/Home/Movies/Exclus">
+                        <h1 class="colored">Exclus</h1>
+                    </a>
+                    <div class="wrapper-content">
 
-                <div class="wrapper-content">
-                    @for (int x = 0; x < 4; x++)
-                    {
                         <div class="movies-affiche">
-                            <img class="affiche-img" src"" />
-                            <h3 class="affiche-title">movietitle</h3>
-                            <h4 class="affiche-format">movieQuality</h4>
+                            <img class="affiche-img" src="@moviesExclus.Image" />
+                            <h3 class="affiche-title">@moviesExclus.Name</h3>
+                            <h4 class="affiche-format">@moviesExclus.format</h4>
                         </div>
-                    }
+                    </div>
                 </div>
-            </div>
+            }
+            @foreach (var moviesBluray in Model.bluray)
+            {
+                <div class="wrapper">
+                    <a href="/Home/Movies/BluRay">
+                        <h1 class="colored">Exclus</h1>
+                    </a>
+                    <div class="wrapper-content">
+
+                        <div class="movies-affiche">
+                            <img class="affiche-img" src="@moviesBluray.Image" />
+                            <h3 class="affiche-title">@moviesBluray.Name</h3>
+                            <h4 class="affiche-format">@moviesBluray.format</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+            @foreach (var moviesVostfr in Model.vostfr)
+            {
+                <div class="wrapper">
+                    <a href="/Home/Movies/Exclus">
+                        <h1 class="colored">Exclus</h1>
+                    </a>
+                    <div class="wrapper-content">
+
+                        <div class="movies-affiche">
+                            <img class="affiche-img" src="@moviesVostfr.Image" />
+                            <h3 class="affiche-title">@moviesVostfr.Name</h3>
+                            <h4 class="affiche-format">@moviesVostfr.format</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+            @foreach (var moviesOav in Model.oav)
+            {
+                <div class="wrapper">
+                    <a href="/Home/Movies/Oav-Manga">
+                        <h1 class="colored">Oav - Manga</h1>
+                    </a>
+                    <div class="wrapper-content">
+
+                        <div class="movies-affiche">
+                            <img class="affiche-img" src="@moviesOav.Image" />
+                            <h3 class="affiche-title">@moviesOav.Name</h3>
+                            <h4 class="affiche-format">@moviesOav.format</h4>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
