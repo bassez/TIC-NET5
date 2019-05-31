@@ -66,6 +66,58 @@ namespace API.Controllers
             }
         }
 
+        // GET api/movies/getmoviesbytypelimited
+        [HttpPost("getmoviesbytypelimited")]
+        public IActionResult GetByTypeLimited([FromForm]string type)
+        {
+            var movies = db.Movies;
+            int cpt = 0;
+            ICollection<Movies> returnedMovies = null;
+
+            foreach (Movies m in movies)
+            {
+                if (m.Type.Contains(type) && cpt < 3)
+                {
+                    returnedMovies.Add(m);
+                    ++cpt;
+                }
+            }
+
+            if (returnedMovies != null)
+            {
+                return Ok(returnedMovies);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        // GET api/movies/getmoviesbytype
+        [HttpPost("getmoviesbytype")]
+        public IActionResult GetByType([FromForm]string type)
+        {
+            var movies = db.Movies;
+            ICollection<Movies> returnedMovies = null;
+
+            foreach (Movies m in movies)
+            {
+                if (m.Type.Contains(type))
+                {
+                    returnedMovies.Add(m);
+                }
+            }
+
+            if (returnedMovies != null)
+            {
+                return Ok(returnedMovies);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         // POST api/movies
         [HttpPost]
         public IActionResult Post([FromBody] Movies movie)
