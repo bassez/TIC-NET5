@@ -12,8 +12,7 @@ namespace PiratesRhumStream.Models
     {
         HttpClient _client = new HttpClient();
         public MovieDetail[] Search(string searchValue) {
-            var url = "http://localhost:5000/api/search/?search=" + searchValue;
-            //  OU var url = "http://localhost:5000/api/search/" + searchValue;
+            var url = "http://localhost:5000/api/movies/search/?search=" + searchValue;
             HttpResponseMessage resp = _client.GetAsync(url).Result;
             if (resp.IsSuccessStatusCode)
             {
