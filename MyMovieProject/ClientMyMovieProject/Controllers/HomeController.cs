@@ -100,7 +100,7 @@ namespace ClientMyMovieProject.Controllers
             }
 
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Edit()
             {
             // var url = "http://localhost:5000/api/users/me";
@@ -117,28 +117,30 @@ namespace ClientMyMovieProject.Controllers
             //         );
             // else
             //     return Redirect("/Home/Account");
-            return View();
+
+                return View();
             }
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete()
             {
-            // var url = "http://localhost:5000/api/users/me";
-            // var jwt = GetJWT();
-            // HttpClient client = new HttpClient();
-            // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+                // var url = "http://localhost:5000/api/users/me";
+                // var jwt = GetJWT();
+                // HttpClient client = new HttpClient();
+                // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
 
-            // HttpResponseMessage resp = client.GetAsync(url).Result;
-            // Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
+                // HttpResponseMessage resp = client.GetAsync(url).Result;
+                // Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
 
-            // if (resp.IsSuccessStatusCode)
-            //     return View(
-            //         JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
-            //         );
-            // else
-            //     return Redirect("/Home/Account");
-            return View();
-        }
+                // if (resp.IsSuccessStatusCode)
+                //     return View(
+                //         JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
+                //         );
+                // else
+                //     return Redirect("/Home/Account");
+
+                return View();
+            }
 
 
         [HttpPost]
