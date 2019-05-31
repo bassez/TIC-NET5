@@ -7,7 +7,7 @@
         <div class="detail-container">
             <div class="detail-title">
                 <h1 class="colored header-title display-4">@Model.Name</h1>
-                <h2> Blu-ray 720p Vostfr</h2>
+                <h2>@Model.Format</h2>
             </div>
             <div class="detail">
                 <div class="detail-img">
@@ -18,23 +18,23 @@
                         <h4 class="colored">Infos sur le film</h4>
                         <div class="info-item">
                             <span class="info-item-name">Catégorie</span>:
-                            <span class="info-item-value">Actions</span>
+                            <span class="info-item-value">@Model.Category</span>
                         </div>
                         <div class="info-item">
                             <span class="info-item-name">Durée</span>:
-                            <span class="info-item-value">120 minutes</span>
+                            <span class="info-item-value">@Model.Length minutes</span>
                         </div>
                         <div class="info-item">
                             <span class="info-item-name">Réalisation</span>:
-                            <span class="info-item-value">Luc Besson</span>
+                            <span class="info-item-value">@Model.Publisher</span>
                         </div>
                         <div class="info-item">
                             <span class="info-item-name">Note</span>:
-                            <span class="info-item-value">3/5</span>
+                            <span class="info-item-value">@Model.average / 20</span>
                         </div>
                         <div class="info-item">
                             <span class="info-item-name">Titre original</span>:
-                            <span class="info-item-value">EndGame</span>
+                            <span class="info-item-value">@Model.Name</span>
                         </div>
                         <h4 class="margetop20 colored">Synopsis</h4>
                         <div class="info-item">
