@@ -31,7 +31,8 @@ namespace ClientMyMovieProject.Controllers
 
         public IActionResult MovieDetail()
             {
-                return View(_service.Get(1));
+                var detail = _service.Get(3);
+                return View(detail);
             }
 
         public IActionResult ModifyAccount()
