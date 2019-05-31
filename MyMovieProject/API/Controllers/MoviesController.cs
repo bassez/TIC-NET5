@@ -27,30 +27,20 @@ namespace API.Controllers
             return Ok(movies);
         }
 
-        // GET api/movies/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        // GET api/movies/search
+        [HttpGet("search")]
+        public IActionResult GetByName(String search)
         {
-            var movie = db.Movies.FirstOrDefault(m => m.Id == id);
-            if (movie != null)
-            {
-                return Ok(movie);
-            } else
+            if(search == null)
             {
                 return NotFound();
             }
-        }
-
-        // GET api/movies/search
-        [HttpPost("search")]
-        public IActionResult GetByName([FromForm]string name)
-        {
             var movies = db.Movies;
-            ICollection<Movies> returnedMovies = null;
+            ICollection<Movies> returnedMovies = new List<Movies>();
 
-            foreach(Movies m in movies)
+            foreach (Movies m in movies)
             {
-                if (m.Name.Contains(name))
+                if (m.Name != null && m.Name.Contains(search))
                 {
                     returnedMovies.Add(m);
                 }
@@ -67,16 +57,20 @@ namespace API.Controllers
         }
 
         // GET api/movies/getmoviesbytypelimited
-        [HttpPost("getmoviesbytypelimited")]
-        public IActionResult GetByTypeLimited([FromForm]string type)
+        [HttpGet("getbytypelimited")]
+        public IActionResult GetByTypeLimited(string type)
         {
+            if(type == null)
+            {
+                return NotFound();
+            }
             var movies = db.Movies;
             int cpt = 0;
-            ICollection<Movies> returnedMovies = null;
+            ICollection<Movies> returnedMovies = new List<Movies>();
 
             foreach (Movies m in movies)
             {
-                if (m.Type.Contains(type) && cpt < 3)
+                if (m.Name != null && m.Type.Contains(type) && cpt < 3)
                 {
                     returnedMovies.Add(m);
                     ++cpt;
@@ -94,15 +88,19 @@ namespace API.Controllers
         }
 
         // GET api/movies/getmoviesbytype
-        [HttpPost("getmoviesbytype")]
+        [HttpGet("getbytype")]
         public IActionResult GetByType([FromForm]string type)
         {
+            if (type == null)
+            {
+                return NotFound();
+            }
             var movies = db.Movies;
-            ICollection<Movies> returnedMovies = null;
+            ICollection<Movies> returnedMovies = new List<Movies>();
 
             foreach (Movies m in movies)
             {
-                if (m.Type.Contains(type))
+                if (m.Name != null && m.Type.Contains(type))
                 {
                     returnedMovies.Add(m);
                 }
@@ -113,6 +111,20 @@ namespace API.Controllers
                 return Ok(returnedMovies);
             }
             else
+            {
+                return NotFound();
+            }
+        }
+
+        // GET api/movies/5
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var movie = db.Movies.FirstOrDefault(m => m.Id == id);
+            if (movie != null)
+            {
+                return Ok(movie);
+            } else
             {
                 return NotFound();
             }
