@@ -42,14 +42,15 @@ namespace PiratesRhumStream.Models
             return null;
         }
 
-        public MovieDetail[] GetHomeMoviesPartType()
+        public MovieDetail[] GetMoviesByTypeLimited(string type)
         {
-            // censer retourner 4 films par format (4 exclus, 4 vostfr, 4 vo, 4 OAV)
-            var url = "http://localhost:5000/api/movies/partType";
+            var url = "http://localhost:5000/api/getmoviesbytypelimited/" + type;
             HttpResponseMessage resp = _client.GetAsync(url).Result;
             if (resp.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<MovieDetail[]>(resp.Content.ReadAsStringAsync().Result);
             return null;
         }
+
+       
     }
 }
