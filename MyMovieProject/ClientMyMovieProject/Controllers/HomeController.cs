@@ -16,6 +16,8 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 
+using System.Net.Http.Headers;
+
 namespace ClientMyMovieProject.Controllers
 {
     public class HomeController : Controller
@@ -31,6 +33,12 @@ namespace ClientMyMovieProject.Controllers
             //_commentSrv = _commentService;
             //_searchSrv = _searchService;
         }
+
+
+        private string GetJWT() {
+            return HttpContext.Session.GetString("JWT");
+        }
+
         public IActionResult Index()
             {
             //MovieDetail[] moviesPartType = _movieSrv.GetHomeMoviesPartType();
@@ -73,7 +81,20 @@ namespace ClientMyMovieProject.Controllers
 
         public IActionResult Account()
             {
-                    return View();
+                var url = "http://localhost:5000/api/users/me";
+                var jwt = GetJWT();
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+
+                HttpResponseMessage resp = client.GetAsync(url).Result;
+                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
+
+                if (resp.IsSuccessStatusCode)
+                    return View(
+                        JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
+                        );
+                else
+                    return Redirect("/Home/Signin");
             }
 
 
@@ -109,7 +130,6 @@ namespace ClientMyMovieProject.Controllers
                 var content = new StringContent(_user, Encoding.UTF8, "application/json");
                 var result =  client.PostAsync(url, content).Result;
                 var contents = result.Content.ReadAsStringAsync().Result;
-
 
                 JObject jsonRes = JObject.Parse(contents);
 
