@@ -8,6 +8,19 @@ namespace API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Body = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Likes",
                 columns: table => new
                 {
@@ -52,33 +65,6 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Body = table.Column<string>(nullable: true),
-                    NotesId = table.Column<int>(nullable: true),
-                    CommentsChildrenId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comments_Comments_CommentsChildrenId",
-                        column: x => x.CommentsChildrenId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comments_Notes_NotesId",
-                        column: x => x.NotesId,
-                        principalTable: "Notes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
                 {
@@ -91,6 +77,7 @@ namespace API.Migrations
                     Type = table.Column<string>(nullable: true),
                     Length = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
+                    Format = table.Column<string>(nullable: true),
                     Date_Publised = table.Column<DateTime>(nullable: false),
                     NotesId = table.Column<int>(nullable: true),
                     CommentsId = table.Column<int>(nullable: true),
@@ -118,16 +105,6 @@ namespace API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_CommentsChildrenId",
-                table: "Comments",
-                column: "CommentsChildrenId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_NotesId",
-                table: "Comments",
-                column: "NotesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movies_CommentsId",

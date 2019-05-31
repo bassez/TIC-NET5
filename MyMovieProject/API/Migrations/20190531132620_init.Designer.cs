@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20190530234254_init")]
+    [Migration("20190531132620_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,15 +25,7 @@ namespace API.Migrations
 
                     b.Property<string>("Body");
 
-                    b.Property<int?>("CommentsChildrenId");
-
-                    b.Property<int?>("NotesId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentsChildrenId");
-
-                    b.HasIndex("NotesId");
 
                     b.ToTable("Comments");
                 });
@@ -62,6 +54,8 @@ namespace API.Migrations
                     b.Property<DateTime>("Date_Publised");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Format");
 
                     b.Property<string>("Image");
 
@@ -120,17 +114,6 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("API.Models.Comments", b =>
-                {
-                    b.HasOne("API.Models.Comments", "CommentsChildren")
-                        .WithMany()
-                        .HasForeignKey("CommentsChildrenId");
-
-                    b.HasOne("API.Models.Notes", "Notes")
-                        .WithMany()
-                        .HasForeignKey("NotesId");
                 });
 
             modelBuilder.Entity("API.Models.Movies", b =>

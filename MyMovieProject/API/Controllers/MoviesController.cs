@@ -27,6 +27,15 @@ namespace API.Controllers
             return Ok(movies);
         }
 
+        // GET api/movies
+        [HttpGet("pages")]
+        public IActionResult Get(int start = 0 , int end = 10)
+            {
+                var movies = db.Movies.Select((movie, i) => i >= start && i <= end);
+                return Ok(movies);
+            }
+
+
         // GET api/movies/search
         [HttpGet("search")]
         public IActionResult GetByName(String search)
