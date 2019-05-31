@@ -12,7 +12,6 @@ namespace PiratesRhumStream.Models
         HttpClient _client = new HttpClient();
         public MovieDetail Get(int id) {
             var url = "http://localhost:5000/api/movies/";
-            // TODO BOEHM
             var resp = _client.GetAsync(url + id).Result;
             if (resp.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<MovieDetail>(resp.Content.ReadAsStringAsync().Result);
