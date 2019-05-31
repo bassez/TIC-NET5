@@ -33,8 +33,11 @@ namespace ClientMyMovieProject.Controllers
         }
         public IActionResult Index()
             {
-            //MovieDetail[] moviesPartType = _movieSrv.GetHomeMoviesPartType();
-            //return View(moviesPartType);
+            //MovieDetail[] exclus = _movieSrv.GetMoviesByTypeLimited('exclus');
+            //MovieDetail[] bluray = _movieSrv.GetMoviesByTypeLimited('Bluray');
+            //MovieDetail[] vostfr = _movieSrv.GetMoviesByTypeLimited('vostfr');
+            //MovieDetail[] oav    = _movieSrv.GetMoviesByTypeLimited('oav');
+            //return View(new { exclus, bluray, vostfr, oav });
             return View();
             }
         public IActionResult Movies()

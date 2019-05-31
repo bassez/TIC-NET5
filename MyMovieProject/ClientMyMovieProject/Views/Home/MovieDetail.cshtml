@@ -43,14 +43,20 @@
                     </div>
                 </div>
             </div>
+            <div class="notation">
+                <input type="number" max="10" min="0" value="0" />
+                <input class="submit-button" type="submit" value="Noter le film !" />
+            </div>
             <div class="comments-wrapper">
                 <section>
                     <textarea class="commentBox" placeholder="Écrivez un commentaire !" type="textarea"></textarea>
                     <p><span class="counter">140</span> Characters left</p>
                     <button class="post-comment">Post</button>
                     <ul class="clearfix comments">
-                        <li>I left a comment...</li>
-                        <li>I left another comment...</li>
+                        @foreach (var comment in Model.comments)
+                        {
+                            <li><span>@comment.author : </span>@comment.content</li>
+                        }
                     </ul>
                 </section>
             </div>
