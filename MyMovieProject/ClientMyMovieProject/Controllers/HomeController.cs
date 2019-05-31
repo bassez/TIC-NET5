@@ -41,12 +41,11 @@ namespace ClientMyMovieProject.Controllers
 
         public IActionResult Index()
             {
-            //MovieDetail[] exclus = _movieSrv.GetMoviesByTypeLimited('exclus');
-            //MovieDetail[] bluray = _movieSrv.GetMoviesByTypeLimited('Bluray');
-            //MovieDetail[] vostfr = _movieSrv.GetMoviesByTypeLimited('vostfr');
-            //MovieDetail[] oav    = _movieSrv.GetMoviesByTypeLimited('oav');
-            //return View(new { exclus, bluray, vostfr, oav });
-            return View();
+            MovieDetail[] exclus = _movieSrv.GetMoviesByTypeLimited("exclus");
+            MovieDetail[] bluray = _movieSrv.GetMoviesByTypeLimited("Bluray");
+            MovieDetail[] vostfr = _movieSrv.GetMoviesByTypeLimited("vostfr");
+            MovieDetail[] oav    = _movieSrv.GetMoviesByTypeLimited("oav");
+            return View(new { exclus, bluray, vostfr, oav });
             }
         public IActionResult Movies()
             {
@@ -104,40 +103,42 @@ namespace ClientMyMovieProject.Controllers
         [HttpPut]
         public IActionResult Edit()
             {
-                // var url = "http://localhost:5000/api/users/me";
-                // var jwt = GetJWT();
-                // HttpClient client = new HttpClient();
-                // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+            // var url = "http://localhost:5000/api/users/me";
+            // var jwt = GetJWT();
+            // HttpClient client = new HttpClient();
+            // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
 
-                // HttpResponseMessage resp = client.GetAsync(url).Result;
-                // Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
+            // HttpResponseMessage resp = client.GetAsync(url).Result;
+            // Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
 
-                // if (resp.IsSuccessStatusCode)
-                //     return View(
-                //         JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
-                //         );
-                // else
-                //     return Redirect("/Home/Account");
+            // if (resp.IsSuccessStatusCode)
+            //     return View(
+            //         JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
+            //         );
+            // else
+            //     return Redirect("/Home/Account");
+            return View();
             }
 
         [HttpDelete]
         public IActionResult Delete()
             {
-                // var url = "http://localhost:5000/api/users/me";
-                // var jwt = GetJWT();
-                // HttpClient client = new HttpClient();
-                // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+            // var url = "http://localhost:5000/api/users/me";
+            // var jwt = GetJWT();
+            // HttpClient client = new HttpClient();
+            // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
 
-                // HttpResponseMessage resp = client.GetAsync(url).Result;
-                // Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
+            // HttpResponseMessage resp = client.GetAsync(url).Result;
+            // Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
 
-                // if (resp.IsSuccessStatusCode)
-                //     return View(
-                //         JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
-                //         );
-                // else
-                //     return Redirect("/Home/Account");
-            }
+            // if (resp.IsSuccessStatusCode)
+            //     return View(
+            //         JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
+            //         );
+            // else
+            //     return Redirect("/Home/Account");
+            return View();
+        }
 
 
         [HttpPost]

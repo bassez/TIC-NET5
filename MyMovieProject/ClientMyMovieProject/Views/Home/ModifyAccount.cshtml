@@ -6,7 +6,7 @@
     <div class="connexion-wrapper">
         <div class="modifyUser">
             <h1>Modifier vos informations</h1>
-            @using (Html.BeginForm("Edit", "Home", FormMethod.Put))
+            @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
             {
                 <div class="input-wrapper">
                     <input class="register-log-input" type="text" placeholder="Email" />
@@ -22,7 +22,7 @@
                 </div>
                 }
 
-                @using (Html.BeginForm("Delete", "Home", FormMethod.Delete))
+                @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
                 {
                     <div class="submit-wrapper">
                         <a class="delete-button">Supprimer le compte </a>

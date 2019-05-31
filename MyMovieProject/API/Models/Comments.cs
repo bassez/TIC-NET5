@@ -10,8 +10,5 @@ namespace API.Models
         public int Id { get; set; }
         public string Body { get; set; }
 
-        // FK
-        public Notes Notes { get; set; }
-        public Comments CommentsChildren { get; set; }
     }
 }

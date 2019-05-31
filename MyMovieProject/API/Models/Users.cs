@@ -19,12 +19,6 @@ namespace API.Models
         public DateTime Birthdate { get; set; }
         public DateTime Date_Created { get; set; }
 
-        // FK
-        // public Notes Notes { get; set; }
-        // public Comments Comments { get; set; }
-        // public Likes Likes { get; set; }
-
-
         public static string GenSalt(int size = 12) {
             var random = new RNGCryptoServiceProvider();
             var _salt = new Byte[size];

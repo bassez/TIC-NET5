@@ -16,6 +16,7 @@ namespace API.Models
         public string Type { get; set; }
         public int Length { get; set; }
         public string Image { get; set; }
+        public string Format { get; set; }
         public DateTime Date_Publised { get; set; }
 
         public Notes Notes { get; set; }
