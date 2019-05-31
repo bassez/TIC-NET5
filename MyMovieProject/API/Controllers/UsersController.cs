@@ -161,6 +161,19 @@ namespace API.Controllers
                 return Json(_user);
             }
 
+        // DELETE api/users/me
+        [HttpDelete("me")]
+        public ActionResult<string> DeleteMe()
+            {
+                var id =  System.Convert.ToInt32(this.User.Identity.Name);
+                var user = db.Users.Where(u => u.Id == id);
+                var user_ = user.Select(FormatUser).ToList()[0];
+
+                db.Users.Remove(user.SingleOrDefault());
+                db.SaveChanges();
+                return Json(user_);
+            }
+
         // DELETE api/users/5
         [HttpDelete("{id}")]
         public ActionResult<string> Delete(int id)

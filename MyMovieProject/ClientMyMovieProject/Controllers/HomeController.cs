@@ -101,6 +101,51 @@ namespace ClientMyMovieProject.Controllers
             }
 
 
+        [HttpPut]
+        public IActionResult Edit()
+            {
+                // var url = "http://localhost:5000/api/users/me";
+                // var jwt = GetJWT();
+                // HttpClient client = new HttpClient();
+                // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+
+                // HttpResponseMessage resp = client.GetAsync(url).Result;
+                // Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
+
+                // if (resp.IsSuccessStatusCode)
+                //     return View(
+                //         JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
+                //         );
+                // else
+                //     return Redirect("/Home/Account");
+            }
+
+        [HttpDelete]
+        public IActionResult Delete()
+            {
+                // var url = "http://localhost:5000/api/users/me";
+                // var jwt = GetJWT();
+                // HttpClient client = new HttpClient();
+                // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+
+                // HttpResponseMessage resp = client.GetAsync(url).Result;
+                // Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(resp));
+
+                // if (resp.IsSuccessStatusCode)
+                //     return View(
+                //         JsonConvert.DeserializeObject<Users>(resp.Content.ReadAsStringAsync().Result)
+                //         );
+                // else
+                //     return Redirect("/Home/Account");
+            }
+
+
+        [HttpPost]
+        public IActionResult Signout()
+            {
+                HttpContext.Session.SetString("JWT", "");
+                return Redirect("/Home/SignIn");
+            }
 
 
         [HttpPost]
