@@ -120,11 +120,45 @@ namespace API.Controllers
             }
 
 
+        // PUT api/users/me
+        [HttpPut("me")]
+        public ActionResult<string> Put(string me, [FromBody] Users  user)
+            {
+                var id =  System.Convert.ToInt32(this.User.Identity.Name);
+
+                var _user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+                var salt = Users.GenSalt();
+                var hashedPassword = Users.HashPassword(user.Password, salt);
+
+                _user.Pseudo = user.Pseudo;
+                _user.Email = user.Email;
+                _user.Password = hashedPassword;
+                _user.Salt = salt;
+
+
+                db.SaveChanges();
+
+                return Json(_user);
+            }
+
+
         // PUT api/users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Users  user)
+        public ActionResult<string> Put(int id, [FromBody] Users  user)
             {
+                var _user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+                var salt = Users.GenSalt();
+                var hashedPassword = Users.HashPassword(user.Password, salt);
 
+                _user.Pseudo = user.Pseudo;
+                _user.Email = user.Email;
+                _user.Password = hashedPassword;
+                _user.Salt = salt;
+
+
+                db.SaveChanges();
+
+                return Json(_user);
             }
 
         // DELETE api/users/5
