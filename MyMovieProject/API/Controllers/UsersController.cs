@@ -30,7 +30,6 @@ namespace API.Controllers
             birthdate = user.Birthdate,
             dateCreated = user.Date_Created
         };
-
         // GET api/users
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -39,12 +38,24 @@ namespace API.Controllers
                 return Json(db.Users.Select(FormatUser));
             }
 
+
+        // GET api/users/me
+        [HttpGet("me")]
+        public ActionResult<string> GetMe()
+            {
+                var id =  System.Convert.ToInt32(this.User.Identity.Name);
+                var me = db.Users.Where(u => u.Id == id).Select(FormatUser).ToList()[0];
+                return Json(me);
+            }
+
+
         // GET api/users/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
             {
                 return Json(db.Users.Where(u => u.Id == id).Select(FormatUser).ToList()[0]);
             }
+
 
         // POST api/users
         [AllowAnonymous]
@@ -76,11 +87,7 @@ namespace API.Controllers
         [HttpPost("authenticate")]
         public ActionResult<string> Authenticate([FromBody] Users userParam)
             {
-                Console.WriteLine("authenticateauthenticateauthenticateauthenticateauthenticateauthenticateauthenticateauthenticate");
-                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(userParam));
                 var user = db.Users.Where(u => u.Email == userParam.Email).ToList()[0];
-                Console.WriteLine("NOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPE");
-                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(user));
 
                 if (user == null)
                     return BadRequest(new { message = "Username or password is incorrect" });
