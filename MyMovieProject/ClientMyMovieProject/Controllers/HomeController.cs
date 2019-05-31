@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,6 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using ClientMyMovieProject.Models;
 using PiratesRhumStream.Models;
 using System.Diagnostics;
+
+using System.Net.Http;
+using Newtonsoft.Json;
+
+using Newtonsoft.Json.Linq;
 
 namespace ClientMyMovieProject.Controllers
 {
@@ -67,6 +73,56 @@ namespace ClientMyMovieProject.Controllers
             {
                 return View();
             }
+
+
+
+
+        [HttpPost]
+        public IActionResult Register(Users user)
+            {
+                HttpClient client = new HttpClient();
+                var url = "http://localhost:5000/api/users/";
+                var _user = Newtonsoft.Json.JsonConvert.SerializeObject(user);
+                var content = new StringContent(_user, Encoding.UTF8, "application/json");
+                var result = client.PostAsync(url, content).Result;
+
+                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(result));
+
+                if (result.IsSuccessStatusCode) {
+                    return Redirect("/Home/SignIn");
+                } else {
+                    return View();
+                }
+
+            }
+
+
+        [HttpPost]
+        public IActionResult Signin(Users user)
+            {
+                HttpClient client = new HttpClient();
+                var url = "http://localhost:5000/api/users/authenticate";
+                var _user = Newtonsoft.Json.JsonConvert.SerializeObject(user);
+                var content = new StringContent(_user, Encoding.UTF8, "application/json");
+                var result =  client.PostAsync(url, content).Result;
+                var contents = result.Content.ReadAsStringAsync().Result;
+
+
+                JObject jsonRes = JObject.Parse(contents);
+
+                Console.WriteLine("NOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPE");
+                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(jsonRes));
+
+                if (result.IsSuccessStatusCode) {
+                    // HttpContext.Current.Session["JWT"] = contents.token;
+                    return Redirect("/Home");
+                } else {
+                    return View();
+                }
+
+            }
+
+
 
         public IActionResult Register()
             {

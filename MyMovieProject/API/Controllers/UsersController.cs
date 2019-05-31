@@ -76,7 +76,11 @@ namespace API.Controllers
         [HttpPost("authenticate")]
         public ActionResult<string> Authenticate([FromBody] Users userParam)
             {
+                Console.WriteLine("authenticateauthenticateauthenticateauthenticateauthenticateauthenticateauthenticateauthenticate");
+                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(userParam));
                 var user = db.Users.Where(u => u.Email == userParam.Email).ToList()[0];
+                Console.WriteLine("NOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPENOPE");
+                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(user));
 
                 if (user == null)
                     return BadRequest(new { message = "Username or password is incorrect" });

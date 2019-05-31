@@ -14,7 +14,6 @@ namespace PiratesRhumStream.Models
         public MovieDetail Get(int id) {
             var url = "http://localhost:5000/api/movies/";
             HttpResponseMessage resp = _client.GetAsync(url + id).Result;
-
             if (resp.IsSuccessStatusCode)
             {
                 //Console.WriteLine(JsonConvert.DeserializeObject<MovieDetail>(resp.Content.ReadAsStringAsync().Result));
@@ -36,7 +35,7 @@ namespace PiratesRhumStream.Models
         public MovieDetail[] GetMoviesByType(string type)
         {
             var url = "http://localhost:5000/api/movies/?type=" + type;
-            //  OU var url = "http://localhost:5000/api/moveis/" + type;
+            //  OU var url = "http://localhost:5000/api/movies/" + type;
             HttpResponseMessage resp = _client.GetAsync(url).Result;
             if (resp.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<MovieDetail[]>(resp.Content.ReadAsStringAsync().Result);
