@@ -31,7 +31,8 @@ namespace ClientMyMovieProject.Controllers
 
         public IActionResult MovieDetail()
             {
-                var detail = _service.Get(3);
+                var movieId = RouteData.Values["id"];
+                var detail = _service.Get(movieId);                
                 return View(detail);
             }
 
